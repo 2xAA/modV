@@ -12,7 +12,8 @@ module.exports = {
   // https://cli.vuejs.org/config/#pages
   pages: {
     index: "src/main.js",
-    colorPicker: "src/subpages/color-picker/main.js"
+    colorPicker: "src/subpages/color-picker/main.js",
+    splashScreen: "src/subpages/splash-screen/main.js"
   },
 
   configureWebpack: {

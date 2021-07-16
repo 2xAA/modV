@@ -28,7 +28,6 @@ export default class ModV {
   windowHandler = windowHandler;
   use = use;
   debug = false;
-  ready = false;
   features = Vue.observable({
     energy: 0,
     rms: 0,
@@ -50,6 +49,10 @@ export default class ModV {
   };
 
   constructor() {
+    let resolver = null;
+    this.ready = new Promise(resolve => {
+      resolver = resolve;
+    });
     this.$worker = new Worker();
     this.$asyncWorker = new PromiseWorker(this.$worker);
 
@@ -66,6 +69,11 @@ export default class ModV {
 
       const message = e.data;
       const { type } = message;
+
+      if (type === "worker-setup-complete") {
+        resolver();
+        ipcRenderer.send("modv-ready");
+      }
 
       if (Array.isArray(message)) {
         return;
@@ -199,8 +207,6 @@ export default class ModV {
       });
     });
 
-    this.ready = true;
-    ipcRenderer.send("modv-ready");
     ipcRenderer.send("get-media-manager-state");
 
     window.addEventListener("beforeunload", () => {

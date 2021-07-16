@@ -32,4 +32,12 @@ Object.defineProperty(Vue.prototype, "$modV", {
 window.Vue = new Vue({
   render: h => h(App),
   store
-}).$mount("#app");
+});
+
+async function start() {
+  modV.setup();
+  await modV.ready;
+  window.Vue.$mount("#app");
+}
+
+start();

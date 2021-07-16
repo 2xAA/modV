@@ -187,27 +187,6 @@ export default {
   },
 
   async mounted() {
-    if (!this.$modV.ready) {
-      await this.$modV.setup();
-    }
-    // this.$modV.$worker.addEventListener("message", e => {
-    //   if (e.data.type === "outputs/SET_MAIN_OUTPUT") {
-    //     this.resize();
-    //   }
-    // });
-
-    // window.addEventListener("keypress", e => {
-    //   // f
-    //   if (e.keyCode === 102) {
-    //     this.makeFullScreen();
-    //   }
-
-    //   // q
-    //   if (e.keyCode === 113) {
-    //     this.showUi = !this.showUi;
-    //   }
-    // });
-
     this.rightColumnWidth = window.innerWidth * 0.33;
   },
 
